@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ISpotifyClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpotifyAction.cs" />
     <Compile Include="UnmanagedSpotifyClient.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

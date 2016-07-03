@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using Lyanna.Hotkeys;
@@ -9,21 +8,6 @@ namespace Lyanna
 {
     class Program
     {
-        private readonly ISpotifyClient _client;
-        private readonly IHotkeyManager _hotkeyManager;
-
-        public Program(ISpotifyClient client, IHotkeyManager hotkeyManager)
-        {
-            if (client == null) throw new ArgumentNullException(nameof(client));
-            if (hotkeyManager == null) throw new ArgumentNullException(nameof(hotkeyManager));
-            _client = client;
-            _hotkeyManager = hotkeyManager;
-
-            _hotkeyManager.AddHotkey(new Hotkey(Key.Left, KeyModifier.Ctrl, hotkey => _client.PreviousTrack()), "PreviousTrack");
-            _hotkeyManager.AddHotkey(new Hotkey(Key.Right, KeyModifier.Ctrl, hotkey => _client.NextTrack()), "NextTrack");
-            _hotkeyManager.AddHotkey(new Hotkey(Key.Space, KeyModifier.Ctrl, hotkey => _client.ToggleTrack()), "ToggleTrack");
-        }
-
         static void Main(string[] args)
         {
             Console.WriteLine("Lyanna - A CLI for global shortcuts for the Spotify client. (-h for help)");
@@ -38,10 +22,26 @@ namespace Lyanna
             }
 
             var hotkeyManager = new DefaultHotkeyManager();
+            var client = new UnmanagedSpotifyClient();
 
-            new Program(new UnmanagedSpotifyClient(), hotkeyManager);
+            hotkeyManager.AddHotkey(new Hotkey(Key.Left, KeyModifier.Ctrl, delegate
+            {
+                client.PreviousTrack();
+                Console.WriteLine("Switching to previous track...");
+            }), "PreviousTrack");
+            hotkeyManager.AddHotkey(new Hotkey(Key.Right, KeyModifier.Ctrl, delegate
+            {
+                client.NextTrack();
+                Console.WriteLine("Switching to next track...");
+            }), "NextTrack");
+            hotkeyManager.AddHotkey(new Hotkey(Key.Space, KeyModifier.Ctrl, delegate
+            {
+                client.ToggleTrack();
+                Console.WriteLine("Starting/pausing current track...");
+            }), "ToggleTrack");
+
             var lyannaApplication = new LyannaApplication();
-            Console.CancelKeyPress += delegate (object sender, ConsoleCancelEventArgs eventArgs)
+            Console.CancelKeyPress += delegate
             {
                 hotkeyManager.RemoveAllHotkeys();
                 lyannaApplication.Shutdown();
