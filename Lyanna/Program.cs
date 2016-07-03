@@ -1,6 +1,5 @@
 ﻿using System;
 using Lyanna.Spotify;
-using Lyanna.Spotify.Properties;
 
 namespace Lyanna
 {
