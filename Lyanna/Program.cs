@@ -44,7 +44,6 @@ namespace Lyanna
             Console.CancelKeyPress += delegate
             {
                 hotkeyManager.RemoveAllHotkeys();
-                lyannaApplication.Shutdown();
             };
 
             //Ugly hack to make our console application run without closing and without doing stuff like Thread.Sleeps
