@@ -33,14 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -50,6 +54,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Lyanna.Hotkeys\Lyanna.Hotkeys.csproj">
+      <Project>{b5751f23-8c6e-4d0a-b958-ecdeac8643e9}</Project>
+      <Name>Lyanna.Hotkeys</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Lyanna.Spotify\Lyanna.Spotify.csproj">
       <Project>{c20f225d-4d19-4147-9dae-5d999a4ca915}</Project>
       <Name>Lyanna.Spotify</Name>
