@@ -1,4 +1,4 @@
-﻿namespace Lyanna.Spotify.Properties
+﻿namespace Lyanna.Spotify
 {
     public class UnmanagedSpotifyClient : ISpotifyClient
     {
